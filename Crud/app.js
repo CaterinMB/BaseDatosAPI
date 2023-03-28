@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 app.use(express.static('public'))
 
 app.get('/',(req, res)=>{
-    res.status(200).send("Servidor del curso 2501259")
+    res.status(200).send("BIENVENID@S A Pach_OS")
 })
 
 app.listen(port, ()=>{
