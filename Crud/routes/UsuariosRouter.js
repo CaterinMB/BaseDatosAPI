@@ -29,7 +29,7 @@ router.get('/:id', async(req, res)=>{
     const client = new MongoClient(uri)
     try{
         await client.connect()
-        const result = await client.db('Pach_OS').collection('Usuarios').findOnr({_id: new ObjectId(id) })
+        const result = await client.db('Pach_OS').collection('Usuarios').findOne({_id: new ObjectId(id)})
         // res.status(200).json(result)
         if (result){
             response.success(req, res, "Usuario(s) Encontrado(s)", 200)
