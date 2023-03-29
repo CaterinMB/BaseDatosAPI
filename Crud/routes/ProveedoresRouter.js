@@ -24,11 +24,11 @@ router.get('/', async(req, res)=>{
 
 // 2 findOne() HTTP: GET
 router.get('/:id', async(req, res)=>{
-    const id = req.params.id_Usuario
+    const id = req.params.id_Proveedor
     const client = new MongoClient(uri)
     try{
         await client.connect()
-        const result = await client.db('Pach_OS').collection('Provedor').findOnr({_id: new ObjectId(id_Usuario) })
+        const result = await client.db('Pach_OS').collection('Provedor').findOne({_id: new ObjectId(id) })
         // res.status(200).json(result)
         if (result){
             response.success(req, res, "Proveedor(es) Encontrado(s)", 200)
