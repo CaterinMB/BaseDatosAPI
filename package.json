@@ -1,0 +1,21 @@
+{
+  "name": "adso",
+  "version": "1.0.0",
+  "description": "API REST para el curso de Nodejs MongoDB",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "\"Mongo\"",
+    "\"express\"",
+    "\"nodejs\""
+  ],
+  "author": "Cate",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "mongodb": "^5.1.0"
+  }
+}
