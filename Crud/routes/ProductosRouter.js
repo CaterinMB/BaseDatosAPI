@@ -1,4 +1,5 @@
 const express = require('express')
+app = express()
 const bodyParser = require('body-parser')
 const { MongoClient, ObjectId} = require("mongodb");
 const uri = "mongodb+srv://Pacho:Pacho12314@pach-os.bim9k0o.mongodb.net/?retryWrites=true&w=majority";
@@ -25,7 +26,7 @@ router.get('/', async(req, res)=>{
 
 // 2 findOne() HTTP: GET
 router.get('/:id', async(req, res)=>{
-    const id = req.params.id_Producto
+    const id = req.params.id
     const client = new MongoClient(uri)
     try{
         await client.connect()
@@ -60,14 +61,32 @@ router.post('/', async(req, res)=>{
 })
 
 // UPDATE
-// UpdateOne() HTTP: PATCH
-router.patch('/:id', async(req, res)=>{
-    const id = req.params.id_Producto
+// UpdateOne() HTTP: PUT
+router.put("/:id", async(req, res) =>{
+    const id = req.params.id
     const body = req.body
     const client = new MongoClient(uri)
     try{
         await client.connect()
-        const result = await client.db('Pach_OS').collection('Productos').updateOne({_id: new ObjectId(id)}, {$set:{nom_Producto: body.nom_Producto, categoria: body.categoria}})
+        const result = await client.db("Pach_OS").collection("Productos").updateOne({_id: new ObjectId(id)}, {$set: body})
+        res.json({
+            message: "Producto Actualizado",
+            data: body
+        })
+    }finally{
+        await client.close()
+    }
+})
+
+// UPDATE
+// UpdateOne() HTTP: PATCH
+router.patch('/:id', async(req, res)=>{
+    const id = req.params.id
+    const body = req.body
+    const client = new MongoClient(uri)
+    try{
+        await client.connect()
+        const result = await client.db('Pach_OS').collection('Productos').updateOne({_id: new ObjectId(id)}, {$set:{body}})
         res.status(200).json({
             message: 'Producto Actualizado',
             data: body,
@@ -81,7 +100,7 @@ router.patch('/:id', async(req, res)=>{
 // DELETE
 // DeleteOne() HTTP: DELETE
 router.delete('/:id', async(req, res)=>{
-    const id = req.params.id_Producto
+    const id = req.params.id
     const client = new MongoClient(uri)
     try{
         await client.connect()
